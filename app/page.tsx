@@ -1,7 +1,9 @@
 import ScrollProgress from "@/app/components/ScrollProgress"
 import ScrollHint from "@/app/components/ScrollHint";
-
-
+import TechStrip from "@/app/components/SkillBar";
+import ProjectsSection, { Project } from "@/app/components/Projects";
+import StickyFooter  from "@/app/components/StickyFooter";
+import RollingTitle from "./components/RollingTitle";
 
 
 export default function Home() {
@@ -12,6 +14,29 @@ export default function Home() {
     { label: "Contact", href: "mailto:you@example.com" },
   ] as const;
 
+  const projects: Project[] = [
+  {
+    title: "Liturgy.Display",
+    description: "Realtime slide voice recognition based presentation system.",
+    tags: ["FastAPI", "Vosk"],
+    links: {code: "https://github.com/adover06/liturgy.display" },
+  },
+  {
+    title: "Personal Portfolio",
+    description: "Sleek site built on Next.js for optimized CSR",
+    image: "/projects/site.png",
+    tags: ["Next.js", "React", "Tailwind"],
+    links: { code: "https://github.com/you/" },
+  },
+  {
+    title: "MagicMirror",
+    description: "An Asthetic smart mirror to improve productivity",
+    image: "/projects/portfolio.png",
+    tags: ["Node.js"],
+    links: {code: "https://github.com/you/portfolio" },
+  },
+];
+
   return (
     <>  
     <ScrollProgress/>
@@ -19,8 +44,8 @@ export default function Home() {
       <div className="text-center">
         <h1 className="font-bold leading-tight tracking-tight text-[clamp(2.5rem,6vw,5.75rem)]">
           <span className="block">Hello, I’m</span>
-          <span className="block mt-3 bg-gradient-to-r from-blue-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text">Andrew Dover.</span>
-          <p className="block text-lg">&lt;Full Stack Developer/&gt;</p>
+          <span className="block mt-3 bg-gradient-to-r from-blue-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text ">Andrew Dover.</span>
+          <RollingTitle/>
         </h1>
       
         <nav aria-label="Primary" className="mt-12">
@@ -31,7 +56,7 @@ export default function Home() {
                 <li key={label}>
                   <a
                     href={href}
-                    className="inline-block px-3 py-1 rounded-md text-lg sm:text-xl underline underline-offset-8 decoration-2 transition-all focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    className="inline-block px-3 py-1 rounded-md text-lg sm:text-xl hover:opacity-30 underline underline-offset-8 decoration-2 transition-all"
                     {...(external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
@@ -46,6 +71,9 @@ export default function Home() {
       </div>
     </main>
     
+    <ProjectsSection projects={projects} />
+    <TechStrip tallFactor={4} maxScale={1.7} focusRadius={240}  />
+    <StickyFooter/>
     </>
   );
 }

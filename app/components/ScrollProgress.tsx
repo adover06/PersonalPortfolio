@@ -9,7 +9,7 @@ export default function ScrollProgress() {
     let raf = 0;
     const update = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
-      const p = total > 0 ? window.scrollY / total : 0; // 0..1
+      const p = total > 0 ? (window.scrollY +100 )/ total : 0; // 0..1
       if (barRef.current) {
         barRef.current.style.transform = `scaleX(${p})`;
         barRef.current.setAttribute("aria-valuenow", String(Math.round(p * 100)));
