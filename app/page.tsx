@@ -1,9 +1,9 @@
-import ScrollProgress from "@/app/components/ScrollProgress"
-import ScrollHint from "@/app/components/ScrollHint";
-import TechStrip from "@/app/components/SkillBar";
-import ProjectsSection, { Project } from "@/app/components/Projects";
-import StickyFooter  from "@/app/components/StickyFooter";
-import RollingTitle from "./components/RollingTitle";
+import ScrollProgress from "@/components/ScrollProgress"
+import ScrollHint from "@/components/ScrollHint";
+import TechStrip from "@/components/SkillBar";
+import ProjectsSection, { Project } from "@/components/Projects";
+import StickyFooter  from "@/components/StickyFooter";
+import RollingTitle from "@/components/RollingTitle";
 
 
 export default function Home() {
