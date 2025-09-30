@@ -4,6 +4,35 @@ import TechStrip from "@/components/SkillBar";
 import ProjectsSection, { Project } from "@/components/Projects";
 import StickyFooter  from "@/components/StickyFooter";
 import RollingTitle from "@/components/RollingTitle";
+import CourseMaterialsSection, { Course } from "@/components/CourseMaterialsSection";
+
+
+const courses: Course[] = [
+  {
+    code: "CS 146",
+    title: "Data Structures and Algorithms",
+    description: "Implementations of advanced tree structures, priority queues, heaps, directed and undirected graphs. Advanced searching and sorting techniques (radix sort, heapsort, mergesort, and quicksort). Design and analysis of data structures and algorithms. Divide-and-conquer, greedy, and dynamic programming algorithm design techniques.",
+    url: "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=17&coid=157882",
+  },
+  {
+    code: "CMPE 120",
+    title: "Computer Organization and Architecture",
+    description: "Introduction to computer organization and architecture, system buses, internal memory and external memory, input/output, central processing unit CPU, instruction sets, CPU structure and function, RISC, control unit.",
+    url: "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41920",
+  },
+  {
+    code: "MATH 32",
+    title: "Calculus 3",
+    description: "Functions of more than one variable, partial derivatives, multiple integrals and vector calculus. Graphical, algebraic and numerical methods of solving problems.",
+    url: "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41254",
+  },
+  {
+    code: "CMPE 131",
+    title: "Software Engineering I",
+    description: "Why software engineering? What is software engineering? Software development lifecycle activities: project planning and management requirements analysis, requirement specification. Software design, software testing, verification, validation, and documentation. Software quality assurance and review techniques, software maintenance, team-based projects.",
+    url: "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41926",
+  },
+];
 
 
 export default function Home() {
@@ -15,12 +44,16 @@ export default function Home() {
   ] as const;
 
   const projects: Project[] = [
+  
   {
-    title: "Liturgy.Display",
-    description: "Realtime slide voice recognition based presentation system.",
-    tags: ["FastAPI", "Vosk"],
-    links: {code: "https://github.com/adover06/liturgy.display" },
+    title: "MagicMirror",
+    description: "An Asthetic smart mirror to improve productivity",
+    image: "/projects/Mirror.png",
+    tags: ["Node.js"],
+    links: {code: "https://github.com/you/portfolio" },
   },
+  
+  
   {
     title: "Personal Portfolio",
     description: "Sleek site built on Next.js for optimized CSR",
@@ -28,19 +61,18 @@ export default function Home() {
     tags: ["Next.js", "React", "Tailwind"],
     links: { code: "https://github.com/you/" },
   },
-  {
-    title: "MagicMirror",
-    description: "An Asthetic smart mirror to improve productivity",
-    image: "/projects/portfolio.png",
-    tags: ["Node.js"],
-    links: {code: "https://github.com/you/portfolio" },
+    {
+    title: "Liturgy.Display",
+    description: "Realtime slide voice recognition based presentation system.",
+    tags: ["FastAPI", "Vosk"],
+    links: {code: "https://github.com/adover06/liturgy.display" },
   },
 ];
 
   return (
     <>  
     <ScrollProgress/>
-    <main className="min-h-screen bg-black text-white grid place-items-center p-6">
+    <main className="min-h-screen bg-black text-white grid place-items-center p-6 ">
       <div className="text-center">
         <h1 className="font-bold leading-tight tracking-tight text-[clamp(2.5rem,6vw,5.75rem)]">
           <span className="block">Hello, I’m</span>
@@ -70,9 +102,10 @@ export default function Home() {
         </nav>
       </div>
     </main>
-    
+    <ScrollHint/>
+    <CourseMaterialsSection courses={courses} />
     <ProjectsSection projects={projects} />
-    <TechStrip tallFactor={4} maxScale={1.7} focusRadius={240}  />
+    <TechStrip  />
     <StickyFooter/>
     </>
   );
