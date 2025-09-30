@@ -21,7 +21,7 @@ export default function StickyFooter() {
             {/* GitHub */}
             <li>
               <a
-                href="https://github.com/your-username"
+                href="https://github.com/adover06"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -36,7 +36,7 @@ export default function StickyFooter() {
             {/* LinkedIn */}
             <li>
               <a
-                href="https://www.linkedin.com/in/your-username"
+                href="https://www.linkedin.com/in/adover06"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -51,7 +51,7 @@ export default function StickyFooter() {
             {/* Email */}
             <li>
               <a
-                href="mailto:you@example.com"
+                href="mailto:andrew.dover@gmail.com?subject=Inquiry"
                 aria-label="Email"
                 className="rounded focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:text-white"
               >

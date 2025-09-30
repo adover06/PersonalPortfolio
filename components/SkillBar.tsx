@@ -6,13 +6,12 @@ type Icon = { src: string; alt: string };
 const DEFAULT_ICONS: Icon[] = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg", alt: "Python" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg", alt: "Java" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg", alt: "Git" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original-wordmark.svg", alt: "FastAPI" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg", alt: "TypeScript" },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg", alt: "Git" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original-wordmark.svg", alt: "Arduino" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/debian/debian-plain.svg", alt: "Debian" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg", alt: "React" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg", alt: "Next.js" },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg", alt: "Docker" },  
 
 ];
@@ -33,7 +32,7 @@ type Props = {
 export default function TechStripFocusLine({
   icons = DEFAULT_ICONS,
  tallFactor = 2.2,
-maxScale = 2.2,
+maxScale = 3,
 focusRadius = 200,
   sizeClass = "h-14 w-14 md:h-16 md:w-16",
 }: Props) {
@@ -59,7 +58,7 @@ focusRadius = 200,
       const p = Math.min(1, Math.max(0, raw));
 
       // Horizontal translation of the whole row
-      const maxShift = Math.max(0, row.scrollWidth - viewport.clientWidth);
+      const maxShift = ((row.scrollWidth - viewport.clientWidth) + (viewport.clientWidth*0.35));
       const x = -maxShift * p;
       row.style.transform = `translate3d(${x}px,0,0)`;
 
@@ -112,7 +111,7 @@ focusRadius = 200,
   <div ref={viewportRef} className="sticky top-0 h-screen overflow-hidden">
     {/* Heading overlay */}
     <div className="absolute top-6 left-1/2 -translate-x-1/2 z-[999] pointer-events-none">
-      <h2 className="text-center text-2xl md:text-3xl font-bold">My Specialties</h2>
+      <h2 className="text-center text-2xl md:text-3xl font-bold">My Top 10 Specialties</h2>
     </div>
 
     {/* Moving strip area */}
@@ -140,7 +139,7 @@ focusRadius = 200,
       key={icon.alt + i}
       ref={(el) => { if (el) itemRefs.current[i] = el; }}
       className="shrink-0 transition-[transform,opacity] duration-300 ease-linear"
-      style={{ transform: "scale(1)", opacity: 0.7 }}
+      style={{ transform: "scale(1)", opacity: 0.9 }}
     >
       <img
         src={icon.src}

@@ -40,7 +40,7 @@ export default function Home() {
     { label: "GitHub", href: "https://github.com/adover06" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/adover06" },
     { label: "Resume", href: "/resume.pdf" }, // place resume.pdf in /public
-    { label: "Contact", href: "mailto:you@example.com" },
+    { label: "Contact", href:"mailto:andrew.dover@gmail.com?subject=Inquiry" },
   ] as const;
 
   const projects: Project[] = [

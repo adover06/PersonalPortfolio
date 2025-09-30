@@ -11,7 +11,7 @@ export default function CourseMaterialsSection({ courses }: { courses: Course[] 
       <div className="mx-auto max-w-6xl px-6">
         <header className="mb-6 sm:mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold">Courses</h2>
-          <p className="mt-2 text-white/70">Display of all my latest courses and pages</p>
+          <p className="mt-2 text-white/70">Display of all my latest courses</p>
         </header>
 
         {/* One big box */}
