@@ -1,18 +1,34 @@
 {
 "Projects":[
-  
   {
-    "title": "Personal Portfolio",
-    "description": "Sleek site built on Next.js for optimized CSR",
-    "image": "/projects/site.png",
-    "tags": ["Next.js", "React", "Tailwind"],
-    "links": { "code": "https://github.com/adover06/PersonalPortfolio" }
+    "title": "Liturgical.Display",
+    "description": "Voice-controlled presentation system with FastAPI, WebSockets, and <200ms latency using Vosk STT for offline recognition.",
+    "tags": ["Python", "FastAPI", "Tailwind", "WebSockets", "Vosk"],
+    "links": {"code": "https://github.com/adover06/liturgy.display"}
   },
-    {
-    "title": "Liturgy.Display",
-    "description": "Realtime slide voice recognition based presentation system.",
-    "tags": ["FastAPI", "Vosk"],
-    "links": {"code": "https://github.com/adover06/liturgy.display" }
+  {
+    "title": "Spartan LMS",
+    "description": "Lightweight Canvas-style LMS with Flask, SQLite, and SQLAlchemy featuring auth, grade management, and secure file handling.",
+    "tags": ["Python", "Flask", "SQLite", "SQLAlchemy"],
+    "links": {"code": ""}
+  },
+  {
+    "title": "APRS Hiking Tracker",
+    "description": "Self-tracking APRS hiking tool parsing TCP packets, running PostGIS geospatial queries, and mapping live routes via Mapbox.",
+    "tags": ["Python", "PostgreSQL", "PostGIS", "Mapbox", "APRS"],
+    "links": {"code": ""}
+  },
+  {
+    "title": "Rust+ IoT Bridge",
+    "description": "Event-driven IoT gateway listening to Rust+ companion API, forwarding rules from YAML to LAN devices with debouncing and retries.",
+    "tags": ["Python", "FCM", "Docker", "IoT"],
+    "links": {"code": ""}
+  },
+  {
+    "title": "Real-Time ISS Doppler Tracking",
+    "description": "Real-time Doppler calculator using SGP4 orbital propagation and radial velocity math to predict ISS frequency shifts.",
+    "tags": ["Python", "SGP4", "Orbital Mechanics", "Doppler"],
+    "links": {"code": ""}
   }
 ],
 "Courses":[
