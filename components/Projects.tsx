@@ -22,7 +22,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
           {projects.map((p, i) => (
             <MagicCard
               key={p.title}
-              className="rounded-2xl overflow-hidden"
+              className="rounded-2xl overflow-hidden border border-white/10 hover:scale-[1.04] transition-transform duration-150"
               gradientSize={300}
               gradientFrom="#FFBF00"
               gradientTo="#800080"
@@ -34,7 +34,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                     alt={`${p.title} screenshot`}
                     fill
                     sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                    className="object-cover"
+                    className="object-cover p-0.5 rounded-2xl "
                     priority={i < 2}
                   />
                 ) : (

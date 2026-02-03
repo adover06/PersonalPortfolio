@@ -29,15 +29,15 @@ export default function Home() {
         <MainHero links={links} />
       </main>
       <ScrollHint />
-      <Terminal className="center mx-auto my-20 max-w-2xl max-h-220 bg-black">
+      <Terminal className="center mx-auto my-20 max-w-2xl max-h-220 bg-black transition-all duration-700 overflow-hidden">
         <TypingAnimation duration={30}>$ cd ~/Projects</TypingAnimation>
         <TypingAnimation duration={20}>$ source SJSU/bin/activate</TypingAnimation>
-        <TypingAnimation duration={20}>$ python contribute.py</TypingAnimation>
+        <TypingAnimation duration={20}>$ python contribute.py --git</TypingAnimation>
         <AnimatedSpan delay={0.5}>
           $ {new Date().toLocaleTimeString()} INFO Application Started
         </AnimatedSpan>
         <AnimatedSpan delay={0.5}>
-          $ {new Date().toLocaleTimeString()} INFO Display
+          $ {new Date().toLocaleTimeString()} INFO Display - GET / 200 in 67ms
         </AnimatedSpan>
         <AnimatedSpan><GithubActivityCard year={2026} /></AnimatedSpan>
       </Terminal>

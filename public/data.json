@@ -1,34 +1,46 @@
 {
 "Projects":[
   {
+    "image": "/projects/liturgy.png",
     "title": "Liturgical.Display",
     "description": "Voice-controlled presentation system with FastAPI, WebSockets, and <200ms latency using Vosk STT for offline recognition.",
     "tags": ["Python", "FastAPI", "Tailwind", "WebSockets", "Vosk", "STT", "Docker Compose", "Redis" ],
     "links": {"code": "https://github.com/adover06/liturgy.display"}
   },
   {
+    "image": "/projects/lms.png",
     "title": "Spartan LMS",
     "description": "Lightweight Canvas-style LMS with Flask, SQLite, and SQLAlchemy featuring auth, grade management, and secure file handling.",
     "tags": ["Python", "Flask", "SQLite", "SQLAlchemy", "RAG", "OpenAI"],
-    "links": {"code": ""}
+    "links": {"code": "https://github.com/adover06/SpartanSync"}
   },
   {
+    "image": "/projects/track.png",
     "title": "APRS Hiking Tracker",
     "description": "Self-tracking APRS hiking tool parsing TCP packets, running PostGIS geospatial queries, and mapping live routes via Mapbox.",
     "tags": ["Python", "PostgreSQL", "PostGIS", "Mapbox", "APRS"],
-    "links": {"code": ""}
+    "links": {"code": "https://github.com/adover06/aprs-tracker-fullstack"}
   },
   {
+    "image": "/projects/rust.png",
     "title": "Rust+ IoT Bridge",
     "description": "Event-driven IoT gateway listening to Rust+ companion API, forwarding rules from YAML to LAN devices with debouncing and retries.",
     "tags": ["Python", "FCM", "Docker", "IoT", "ESP32"],
-    "links": {"code": ""}
+    "links": {"code": "https://github.com/adover06/RUSTPLUS-IoT-Gateway"}
   },
   {
+    "image": "/projects/doppler.png",
     "title": "Real-Time ISS Doppler Tracking",
     "description": "Real-time Doppler calculator using SGP4 orbital propagation and radial velocity math to predict ISS frequency shifts.",
     "tags": ["Python", "SGP4", "Orbital Mechanics", "Doppler"],
-    "links": {"code": ""}
+    "links": {"code": "https://github.com/adover06/dopplercalc"}
+  },
+  {
+    "image": "/projects/homelab.png",
+    "title": "Home Lab",
+    "description": "Personal home lab setup with Ubunutu Server, leveraging tailscale for security, and equipt with a custom CI/CD workflow.",
+    "tags": ["Linux", "Tailscale", "Prometheus", "Docker", "CI/CD"],
+    "links": {"code": "https://github.com/adover06/hedrick-cicd"}
   }
 ],
 "Links": [
