@@ -1,4 +1,3 @@
-// import ScrollProgress from "@/components/ScrollProgress"
 import ScrollHint from "@/components/ScrollHint";
 import TechStrip from "@/components/SkillBar";
 import ProjectsSection, { Project } from "@/components/Projects";
@@ -12,13 +11,8 @@ const courses: Course[] = data["Courses"]
 
 
 export default function Home() {
-  const links = [
-    { label: "GitHub", href: "https://github.com/adover06" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/adover06" },
-    { label: "Resume", href: "/resume.pdf" }, // place resume.pdf in /public
-    { label: "Contact", href:"mailto:andrew.dover@gmail.com?subject=Inquiry" },
-  ] as const;
 
+  const links = data["Links"]; 
   const projects: Project[] = data["Projects"];
 
   return (
@@ -28,12 +22,10 @@ export default function Home() {
     <main className="min-h-screen bg-black text-white grid place-items-center p-6 ">
       <MainHero links={links} />
     </main>
-    
     <ScrollHint/>
     <TechStrip  />
     <ProjectsSection projects={projects} />
     <CourseMaterialsSection courses={courses} />
-  
     <StickyFooter/>
     </>
   );

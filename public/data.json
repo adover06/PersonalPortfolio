@@ -31,6 +31,12 @@
     "links": {"code": ""}
   }
 ],
+"Links": [
+  { "label": "GitHub", "href": "https://github.com/adover06" },
+  { "label": "LinkedIn", "href": "https://www.linkedin.com/in/adover06" },
+  { "label": "Resume", "href": "/resume.pdf" },
+  { "label": "Contact", "href": "mailto:andrew.dover@gmail.com?subject=Inquiry" }
+],
 "Courses":[
     {
     "code": "CS 146",
