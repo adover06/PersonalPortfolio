@@ -21,7 +21,7 @@
   {
     "title": "Rust+ IoT Bridge",
     "description": "Event-driven IoT gateway listening to Rust+ companion API, forwarding rules from YAML to LAN devices with debouncing and retries.",
-    "tags": ["Python", "FCM", "Docker", "IoT"],
+    "tags": ["Python", "FCM", "Docker", "IoT", "ESP32"],
     "links": {"code": ""}
   },
   {
@@ -39,10 +39,34 @@
     "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=17&coid=157882"
   },
   {
+    "code": "CS 151",
+    "title": "Object-Oriented Design",
+    "description": "Design of classes and interfaces. Object-oriented design methodologies and notations. Design patterns. Generics and reflection. Exception handling. Concurrent programming. Graphical user interface programming. Software engineering concepts and tools. Required team-based programming assignment.",
+    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=42154"
+  },
+  {
     "code": "CMPE 120",
     "title": "Computer Organization and Architecture",
     "description": "Introduction to computer organization and architecture, system buses, internal memory and external memory, input/output, central processing unit CPU, instruction sets, CPU structure and function, RISC, control unit.",
     "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41920"
+  },
+  {
+    "code": "CMPE 102",
+    "title": "Assembly Language Programming",
+    "description": "Assembly programming; assembly-C interface; CPU and memory organization; addressing modes; arithmetic, logic and branch instructions; arrays, pointers, subroutines, stack and procedure calls; software interrupts; multiplication, division and floating point arithmetic.",
+    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=116041"
+  },
+  {
+    "code": "CMPE 131",
+    "title": "Software Engineering I",
+    "description": "Why software engineering? What is software engineering? Software development lifecycle activities: project planning and management requirements analysis, requirement specification. Software design, software testing, verification, validation, and documentation. Software quality assurance and review techniques, software maintenance, team-based projects.",
+    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41926"
+  },
+  {
+    "code": "MATH 33LA",
+    "title": "Differential Equations and Linear Algebra",
+    "description": "Matrices, determinants, systems of linear equations, vector geometry, linear transformations, eigenvalues and eigenvectors, diagonalization, first order differential equations, linear systems of differential equations, higher order differential equations, Laplace transforms.",
+    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=46040"
   },
   {
     "code": "MATH 32",
@@ -51,10 +75,11 @@
     "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41254"
   },
   {
-    "code": "CMPE 131",
-    "title": "Software Engineering I",
-    "description": "Why software engineering? What is software engineering? Software development lifecycle activities: project planning and management requirements analysis, requirement specification. Software design, software testing, verification, validation, and documentation. Software quality assurance and review techniques, software maintenance, team-based projects.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41926"
-  }]
+    "code": "ISE 130",
+    "title": "Engineering Probability and Statistics",
+    "description": "Probability theory, graphical displays of data, graphical methods of comparisons of samples and hypotheses testing. Statistical estimation and inference. Uses graphical statistical packages.",
+    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=117721"
+  }
+]
 
 }

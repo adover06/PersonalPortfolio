@@ -6,12 +6,8 @@ import StickyFooter  from "@/components/StickyFooter";
 import RollingTitle from "@/components/RollingTitle";
 import CourseMaterialsSection, { Course } from "@/components/CourseMaterialsSection";
 import { ScrollProgress } from "@/components/ui/scroll-progress"
+import { RetroGrid } from "@/components/ui/retro-grid"
 import data from "@/public/data.json"
-import {
-  ScrollVelocityContainer,
-  ScrollVelocityRow,
-} from "@/components/ui/scroll-based-velocity"
-
 const courses: Course[] = data["Courses"]
 
 
@@ -28,6 +24,7 @@ export default function Home() {
   return (
     <>  
     <ScrollProgress/>
+    <RetroGrid />
     <main className="min-h-screen bg-black text-white grid place-items-center p-6 ">
       <div className="text-center">
         <h1 className="font-bold leading-tight tracking-tight text-[clamp(2.5rem,6vw,5.75rem)]">
@@ -58,6 +55,7 @@ export default function Home() {
         </nav>
       </div>
     </main>
+    
     <ScrollHint/>
     <TechStrip  />
     <ProjectsSection projects={projects} />
