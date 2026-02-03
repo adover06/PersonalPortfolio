@@ -3,13 +3,13 @@
   {
     "title": "Liturgical.Display",
     "description": "Voice-controlled presentation system with FastAPI, WebSockets, and <200ms latency using Vosk STT for offline recognition.",
-    "tags": ["Python", "FastAPI", "Tailwind", "WebSockets", "Vosk"],
+    "tags": ["Python", "FastAPI", "Tailwind", "WebSockets", "Vosk", "STT", "Docker Compose", "Redis" ],
     "links": {"code": "https://github.com/adover06/liturgy.display"}
   },
   {
     "title": "Spartan LMS",
     "description": "Lightweight Canvas-style LMS with Flask, SQLite, and SQLAlchemy featuring auth, grade management, and secure file handling.",
-    "tags": ["Python", "Flask", "SQLite", "SQLAlchemy"],
+    "tags": ["Python", "Flask", "SQLite", "SQLAlchemy", "RAG", "OpenAI"],
     "links": {"code": ""}
   },
   {
