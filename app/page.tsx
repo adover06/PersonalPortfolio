@@ -7,6 +7,10 @@ import RollingTitle from "@/components/RollingTitle";
 import CourseMaterialsSection, { Course } from "@/components/CourseMaterialsSection";
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 import data from "@/public/data.json"
+import {
+  ScrollVelocityContainer,
+  ScrollVelocityRow,
+} from "@/components/ui/scroll-based-velocity"
 
 const courses: Course[] = data["Courses"]
 
@@ -55,9 +59,10 @@ export default function Home() {
       </div>
     </main>
     <ScrollHint/>
+    <TechStrip  />
     <ProjectsSection projects={projects} />
     <CourseMaterialsSection courses={courses} />
-    <TechStrip  />
+  
     <StickyFooter/>
     </>
   );
