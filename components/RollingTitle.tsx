@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 
 type Titles = { title: string; brackets: boolean };
 const titles: Titles[] = [
-  { title: "Software Engineer", brackets: true },
+  { title: "Software Engineer", brackets: false },
+  { title: "Chud", brackets: false },
   { title: "Student", brackets: false },
   { title: "Developer", brackets: true },
   { title: "Technologist", brackets: false },
   { title: "Outdoor Explorer", brackets: false },
+  
 ];
 
 export default function RollingTitleFlip() {

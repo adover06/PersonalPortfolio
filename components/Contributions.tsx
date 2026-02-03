@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { MorphingText } from "@/components/ui/morphing-text"

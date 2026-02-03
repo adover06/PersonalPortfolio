@@ -13,6 +13,7 @@ import {
   Terminal,
   TypingAnimation,
 } from "@/components/ui/terminal"
+import { BlurFade } from "@/components/ui/blur-fade"
 const courses: Course[] = data["Courses"]
 
 
@@ -41,8 +42,12 @@ export default function Home() {
         </AnimatedSpan>
         <AnimatedSpan><GithubActivityCard year={2026} /></AnimatedSpan>
       </Terminal>
+      <BlurFade delay={0.25} duration={0.5} inView={true}>
       <ProjectsSection projects={projects} />
+      </BlurFade>
+      <BlurFade delay={0.5} duration={0.5} inView={true}>
       <CourseMaterialsSection courses={courses} />
+      </BlurFade>
       <TechStrip />
       <StickyFooter />
     </>
