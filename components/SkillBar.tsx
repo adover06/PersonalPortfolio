@@ -54,10 +54,10 @@ export default function TechStrip({ icons = ICONS }: Props) {
       </div> */}
       <div className="w-full px-2 sm:px-4">
         <ScrollVelocityContainer className="space-y-8">
-          <ScrollVelocityRow baseVelocity={12} direction={1} className="gap-10">
+          <ScrollVelocityRow baseVelocity={8} direction={1} className="gap-10">
             {renderIcons}
           </ScrollVelocityRow>
-          <ScrollVelocityRow baseVelocity={8} direction={-1} className="gap-10">
+          <ScrollVelocityRow baseVelocity={4} direction={-1} className="gap-10">
             {renderIcons}
           </ScrollVelocityRow>
         </ScrollVelocityContainer>
