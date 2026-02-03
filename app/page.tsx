@@ -1,10 +1,11 @@
-import ScrollProgress from "@/components/ScrollProgress"
+// import ScrollProgress from "@/components/ScrollProgress"
 import ScrollHint from "@/components/ScrollHint";
 import TechStrip from "@/components/SkillBar";
 import ProjectsSection, { Project } from "@/components/Projects";
 import StickyFooter  from "@/components/StickyFooter";
 import RollingTitle from "@/components/RollingTitle";
 import CourseMaterialsSection, { Course } from "@/components/CourseMaterialsSection";
+import { ScrollProgress } from "@/components/ui/scroll-progress"
 import data from "@/public/data.json"
 
 const courses: Course[] = data["Courses"]
@@ -54,8 +55,8 @@ export default function Home() {
       </div>
     </main>
     <ScrollHint/>
-    <CourseMaterialsSection courses={courses} />
     <ProjectsSection projects={projects} />
+    <CourseMaterialsSection courses={courses} />
     <TechStrip  />
     <StickyFooter/>
     </>

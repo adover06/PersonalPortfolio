@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MagicCard } from "@/components/ui/magic-card"
 
 export type Project = {
   title: string;
@@ -19,9 +20,12 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((p, i) => (
-            <article
+            <MagicCard
               key={p.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.06] transition"
+              className="rounded-2xl overflow-hidden"
+              gradientSize={250}
+              gradientFrom="#6EE7B7"
+              gradientTo="#fc03f8"
             >
               <div className="relative aspect-[16/9]">
                 {p.image ? (
@@ -36,7 +40,6 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                 ) : (
                   <div className="h-full w-full bg-gradient-to-br from-white/10 to-white/5" />
                 )}
-                {/* subtle top gradient */}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
 
@@ -81,7 +84,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                   </div>
                 )}
               </div>
-            </article>
+            </MagicCard>
           ))}
         </div>
       </div>
