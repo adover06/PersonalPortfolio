@@ -23,9 +23,9 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
             <MagicCard
               key={p.title}
               className="rounded-2xl overflow-hidden"
-              gradientSize={250}
-              gradientFrom="#6EE7B7"
-              gradientTo="#fc03f8"
+              gradientSize={300}
+              gradientFrom="#FFBF00"
+              gradientTo="#800080"
             >
               <div className="relative aspect-[16/9]">
                 {p.image ? (
