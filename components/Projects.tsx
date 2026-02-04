@@ -20,6 +20,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((p, i) => (
+            <a href={p.links?.demo || p.links?.code} target="_blank" rel="noopener noreferrer">
             <MagicCard
               key={p.title}
               className="rounded-2xl overflow-hidden border border-white/10 hover:scale-[1.04] transition-transform duration-150"
@@ -70,7 +71,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                         <ExternalIcon className="h-4 w-4" /> Demo
                       </a>
                     )}
-                    {p.links.code && (
+                    {/* {p.links.code && (
                       <a
                         href={p.links.code}
                         target="_blank"
@@ -80,11 +81,12 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
                       >
                         <GitHubIcon className="h-4 w-4" /> Code
                       </a>
-                    )}
+                    )} */}
                   </div>
                 )}
               </div>
             </MagicCard>
+            </a>
           ))}
         </div>
       </div>
