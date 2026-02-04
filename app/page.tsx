@@ -8,6 +8,7 @@ import { RetroGrid } from "@/components/ui/retro-grid"
 import data from "@/public/data.json"
 import MainHero from "@/components/MainHero";
 import { GithubActivityCard } from "@/components/Contributions";
+import ExperienceSection, { Job } from "@/components/Experience";
 import {
   AnimatedSpan,
   Terminal,
@@ -21,7 +22,7 @@ export default function Home() {
 
   const links = data["Links"];
   const projects: Project[] = data["Projects"];
-
+  const jobs: Job[] = data["Experience"]; 
   return (
     <>
       <ScrollProgress />
@@ -45,10 +46,13 @@ export default function Home() {
       <BlurFade delay={0.25} duration={0.5} inView={true}>
       <ProjectsSection projects={projects} />
       </BlurFade>
+      <BlurFade delay={0.25} duration={0.5} inView={true}>
+      <ExperienceSection jobs={jobs} />
+      </BlurFade>
+      <TechStrip />
       <BlurFade delay={0.5} duration={0.5} inView={true}>
       <CourseMaterialsSection courses={courses} />
       </BlurFade>
-      <TechStrip />
       <StickyFooter />
     </>
   );

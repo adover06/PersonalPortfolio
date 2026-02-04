@@ -99,5 +99,29 @@
     "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=117721"
   }
 ]
+,
 
+"Experience":[
+  {
+    "company": "Software and Computer Engineering Society (SCE) at SJSU",
+    "role": "Software Engineering Intern",
+    "bullets": [
+      "Built a monitoring service ingesting Prometheus metrics, detecting missing time-series data, and backfilling null values to ensure dashboard accuracy",
+      "Improved CI/CD reliability by implementing thread-safe deployment coordination with locks to prevent race conditions between concurrent deploys",
+      "Scraped Prometheus metrics and modeled JSON responses with dataclasses for clean, structured data handling"
+    ],
+    "url": "https://sce.sjsu.edu"
+  },
+  {
+    "company": "Alpha Custom Tile",
+    "role": "Tile Technician Specialist",
+    "bullets": [
+  "Supported residential installations by measuring layouts, cutting tile, site prep, and coordinating daily tasks with the lead installer.",
+  "Maintained a clean and safe work environment, adhering to safety protocols and ensuring proper handling of tools and materials.",
+  "Collaborated with team members to ensure efficient workflow and timely completion of projects, contributing to high customer satisfaction."
+    ],
+    "url": ""
+  }
+  
+]
 }
