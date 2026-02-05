@@ -11,6 +11,7 @@ export type Project = {
 
 export default function ProjectsSection({ projects }: { projects: Project[] }) {
   return (
+    <>
     <section id="projects" className="bg-black text-white py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <header className="mb-10 sm:mb-12">
@@ -20,7 +21,12 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {projects.map((p, i) => (
-            <a href={p.links?.demo || p.links?.code} target="_blank" rel="noopener noreferrer">
+            <a
+              key={p.title}
+              href={p.links?.demo || p.links?.code}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
             <MagicCard
               key={p.title}
               className="rounded-2xl overflow-hidden border border-white/10 hover:scale-[1.04] transition-transform duration-150"
@@ -91,6 +97,7 @@ export default function ProjectsSection({ projects }: { projects: Project[] }) {
         </div>
       </div>
     </section>
+  </>
   );
 }
 
