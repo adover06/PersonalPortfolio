@@ -49,9 +49,9 @@ export default function TechStrip({ icons = ICONS }: Props) {
 
   return (
     <section className="bg-black text-white pt-16 pb-28 md:pt-20 md:pb-32" aria-label="Technologies">
-      {/* <div className="max-w-4xl mx-auto px-6 md:px-8 mb-8 md:mb-12">
-        <h2 className="text-center text-2xl md:text-3xl font-bold mb-10">My Top 10 Specialties</h2>
-      </div> */}
+      <div className="max-w-4xl mx-auto px-6 md:px-8 mb-8 md:mb-12 ">
+        <h2 className="text-center text-2xl md:text-3xl font-bold mb-10">My Tech Stack</h2>
+      </div>
       <div className="w-full px-2 sm:px-4">
         <ScrollVelocityContainer className="space-y-8">
           <ScrollVelocityRow baseVelocity={8} direction={1} className="gap-10">
