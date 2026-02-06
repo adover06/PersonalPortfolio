@@ -5,7 +5,7 @@ type Titles = { title: string; brackets: boolean };
 const titles: Titles[] = [
   { title: "Software Engineer", brackets: false },
   { title: "Student", brackets: false },
-  { title: "Developer", brackets: true },
+  { title: "Developer", brackets: false },
   { title: "Outdoor Explorer", brackets: false },
   
 ];
