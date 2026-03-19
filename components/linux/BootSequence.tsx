@@ -61,6 +61,7 @@ export default function BootSequence({ onComplete, onSkip }: Props) {
   const [loginText, setLoginText] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [grubProgress, setGrubProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll
@@ -80,10 +81,19 @@ export default function BootSequence({ onComplete, onSkip }: Props) {
     return () => clearInterval(t);
   }, [phase]);
 
-  // GRUB
+  // GRUB — progress bar ticks up then transitions
   useEffect(() => {
     if (phase !== "grub") return;
-    const t = setTimeout(() => setPhase("kernel"), 1600);
+    const t = setInterval(() => {
+      setGrubProgress((p) => {
+        if (p >= 100) {
+          clearInterval(t);
+          setTimeout(() => setPhase("kernel"), 200);
+          return 100;
+        }
+        return p + 4;
+      });
+    }, 60);
     return () => clearTimeout(t);
   }, [phase]);
 
@@ -161,7 +171,17 @@ export default function BootSequence({ onComplete, onSkip }: Props) {
             </div>
             <div className="text-gray-500 px-3 py-1">Andrew Dover Portfolio (recovery mode)</div>
             <div className="text-gray-500 px-3 py-1">Memory test (memtest86+)</div>
-            <div className="mt-3 text-gray-600 text-xs text-center">Use ↑↓ to select, Enter to boot</div>
+            <div className="mt-4 px-3">
+              <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-white transition-all duration-75 ease-linear"
+                  style={{ width: `${grubProgress}%` }}
+                />
+              </div>
+              <div className="text-center text-gray-600 text-xs mt-2">
+                Booting &apos;Andrew Dover Portfolio&apos;... {grubProgress}%
+              </div>
+            </div>
           </div>
         )}
 

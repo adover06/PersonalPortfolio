@@ -119,7 +119,7 @@ export default function BtopView({ onExit }: Props) {
   const coffeeLevel = Math.max(10, 100 - uptime * 0.4);
 
   return (
-    <div className="h-screen w-screen bg-[#06060a] font-mono text-[10px] text-white overflow-hidden flex flex-col animate-fadeIn">
+    <div className="h-screen w-screen bg-[#06060a] font-mono text-xs text-white overflow-hidden flex flex-col animate-fadeIn" style={{ zoom: 1.25 }}>
       {/* Title */}
       <div className="flex items-center justify-between px-2 py-[3px] bg-[#0c0c14] border-b border-cyan-500/20 shrink-0">
         <span className="text-cyan-400 font-bold text-[11px]">btop++</span>

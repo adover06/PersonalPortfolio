@@ -3,9 +3,10 @@ import Image from "next/image";
 
 type Props = {
   onStartSystem: () => void;
+  gradient?: string;
 };
 
-export default function LandingPage({ onStartSystem }: Props) {
+export default function LandingPage({ onStartSystem, gradient = "from-cyan-400 via-blue-400 to-purple-500" }: Props) {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* ────────── Hero ────────── */}
@@ -22,10 +23,8 @@ export default function LandingPage({ onStartSystem }: Props) {
 
         <div className="relative z-10 text-center max-w-3xl">
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
-            <span className="bg-gradient-to-r from-yellow-400  to-red-500 bg-clip-text text-transparent">
-            Andrew&nbsp;
-
-              Dover
+            <span className={`bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+              Andrew&nbsp;Dover
             </span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl mx-auto leading-relaxed">

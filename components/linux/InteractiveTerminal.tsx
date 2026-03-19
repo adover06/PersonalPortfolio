@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import data from "@/public/data.json";
 
 const BtopView = dynamic(() => import("./BtopView"), { ssr: false });
+const GradientPicker = dynamic(() => import("./GradientPicker"), { ssr: false });
 
 /* ═══════════════════ Fake filesystem ═══════════════════ */
 
@@ -121,6 +122,7 @@ const HELP = `Available commands:
   history           Command history
   echo <text>       Print text
   htop / btop       System monitor (live GitHub, Spotify, weather)
+  gradient          Change the site gradient (reverts in 1hr)
   nano <subject>    Compose an email (opens mail client)
   shutdown          Return to portfolio
   exit              Return to portfolio
@@ -256,6 +258,7 @@ function runCommand(input: string, cwd: string, history: string[]): CmdResult {
     case "echo": return { output: arg };
     case "hostname": return { output: "andrew-portfolio" };
     case "top": case "htop": case "btop": return { output: "__BTOP__" };
+    case "gradient": case "theme": return { output: "__GRADIENT__" };
     case "uname": return { output: "Linux andrew-portfolio 6.1.0-portfolio x86_64 GNU/Linux" };
     case "uptime": return { output: " " + new Date().toLocaleTimeString() + " up ~21 years, 1 user, load average: 0.42, 0.38, 0.35" };
     case "date": return { output: new Date().toString() };
@@ -357,7 +360,7 @@ function runCommand(input: string, cwd: string, history: string[]): CmdResult {
 function getCompletions(partial: string, cwd: string): string[] {
   const parts = partial.trimStart().split(/\s+/);
   if (parts.length <= 1) {
-    const cmds = ["help","ls","cat","cd","pwd","tree","open","clear","neofetch","git","whoami","history","echo","man","sudo","ssh","ping","exit","shutdown","hostname","uname","uptime","date","logout","htop","btop","top","nano"];
+    const cmds = ["help","ls","cat","cd","pwd","tree","open","clear","neofetch","git","whoami","history","echo","man","sudo","ssh","ping","exit","shutdown","hostname","uname","uptime","date","logout","htop","btop","top","nano","gradient","theme"];
     return cmds.filter((c) => c.startsWith(parts[0] || ""));
   }
   const pathCmds = ["ls", "cat", "cd", "tree", "open"];
@@ -412,7 +415,7 @@ export default function InteractiveTerminal({ onExit }: Props) {
   const [cwd, setCwd] = useState("/");
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
   const [histIdx, setHistIdx] = useState(-1);
-  const [overlay, setOverlay] = useState<"btop" | null>(null);
+  const [overlay, setOverlay] = useState<"btop" | "gradient" | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -444,6 +447,16 @@ export default function InteractiveTerminal({ onExit }: Props) {
       setHistIdx(-1);
       setInput("");
       setOverlay("btop");
+      return;
+    }
+
+    // Full-screen gradient picker
+    if (result.output === "__GRADIENT__") {
+      setLines((l) => [...l, { prompt, command: trimmed, output: "" }]);
+      setCmdHistory((h) => [...h, trimmed]);
+      setHistIdx(-1);
+      setInput("");
+      setOverlay("gradient");
       return;
     }
 
@@ -505,9 +518,19 @@ export default function InteractiveTerminal({ onExit }: Props) {
   };
 
   // Welcome message
-  // Full-screen btop overlay
+  // Full-screen overlays
   if (overlay === "btop") {
     return <BtopView onExit={() => setOverlay(null)} />;
+  }
+  if (overlay === "gradient") {
+    return (
+      <GradientPicker
+        onExit={() => setOverlay(null)}
+        onApply={(g) => {
+          setLines((l) => [...l, { prompt: "", command: "", output: `\x1b[32m✓ Gradient set to: ${g}\x1b[0m\n  Reverts in 1 hour.` }]);
+        }}
+      />
+    );
   }
 
   const welcome: LineData[] = lines.length === 0 ? [{
@@ -521,7 +544,7 @@ Type \x1b[33mexit\x1b[0m or \x1b[33mshutdown\x1b[0m to return to the portfolio.
   }] : [];
 
   return (
-    <div className="h-screen w-screen bg-[#0d0d0d] flex flex-col font-mono text-sm animate-fadeIn">
+    <div className="h-screen w-screen bg-[#0d0d0d] flex flex-col font-mono text-base animate-fadeIn">
       {/* Terminal title bar */}
       <div className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] border-b border-white/10 shrink-0">
         <span className="h-3 w-3 rounded-full bg-red-500/80 cursor-pointer" onClick={onExit} title="Exit to portfolio" />
