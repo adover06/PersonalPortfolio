@@ -22,9 +22,9 @@ export default function LandingPage({ onStartSystem }: Props) {
 
         <div className="relative z-10 text-center max-w-3xl">
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
-            Andrew
-            <br />
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-400  to-red-500 bg-clip-text text-transparent">
+            Andrew&nbsp;
+
               Dover
             </span>
           </h1>
@@ -77,7 +77,52 @@ export default function LandingPage({ onStartSystem }: Props) {
         </div>
       </section>
 
-      {/* ────────── Projects ────────── */}
+      {/* ────────── Experience ────────── */}
+      <section className="py-20 sm:py-24 px-6">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader title="Experience" sub="Professional and hands-on work." />
+          <div className="space-y-4">
+            {data.Experience.map((j) => (
+              <div
+                key={`${j.company}-${j.role}`}
+                className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6
+                  hover:border-white/10 transition-colors duration-300"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-semibold">{j.company}</h3>
+                    <p className="text-sm text-white/40 font-mono">{j.role}</p>
+                    {j.bullets?.length ? (
+                      <ul className="mt-3 space-y-1.5 text-sm text-white/50 leading-relaxed">
+                        {j.bullets.map((b, i) => (
+                          <li key={i} className="flex gap-2">
+                            <span className="text-white/20 shrink-0 mt-1">›</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                  {j.url && (
+                    <a
+                      href={j.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 font-mono text-xs text-white/25 hover:text-white/50
+                        border border-white/[0.06] rounded-md px-3 py-1.5
+                        hover:border-white/15 transition-all"
+                    >
+                      Visit →
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+{/* ────────── Projects ────────── */}
       <section className="py-20 sm:py-24 px-6">
         <div className="mx-auto max-w-6xl">
           <SectionHeader title="Projects" sub="Things I've built and shipped." />
@@ -126,51 +171,6 @@ export default function LandingPage({ onStartSystem }: Props) {
                   ) : null}
                 </div>
               </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ────────── Experience ────────── */}
-      <section className="py-20 sm:py-24 px-6">
-        <div className="mx-auto max-w-6xl">
-          <SectionHeader title="Experience" sub="Professional and hands-on work." />
-          <div className="space-y-4">
-            {data.Experience.map((j) => (
-              <div
-                key={`${j.company}-${j.role}`}
-                className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6
-                  hover:border-white/10 transition-colors duration-300"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                  <div className="min-w-0">
-                    <h3 className="text-lg font-semibold">{j.company}</h3>
-                    <p className="text-sm text-white/40 font-mono">{j.role}</p>
-                    {j.bullets?.length ? (
-                      <ul className="mt-3 space-y-1.5 text-sm text-white/50 leading-relaxed">
-                        {j.bullets.map((b, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-white/20 shrink-0 mt-1">›</span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                  {j.url && (
-                    <a
-                      href={j.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 font-mono text-xs text-white/25 hover:text-white/50
-                        border border-white/[0.06] rounded-md px-3 py-1.5
-                        hover:border-white/15 transition-all"
-                    >
-                      Visit →
-                    </a>
-                  )}
-                </div>
-              </div>
             ))}
           </div>
         </div>
