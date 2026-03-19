@@ -7,7 +7,7 @@ type Props = {
 
 export default function LandingPage({ onStartSystem }: Props) {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#e6edf3]">
+    <div className="min-h-screen bg-black text-white">
       {/* ────────── Hero ────────── */}
       <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
         {/* Subtle grid */}
@@ -28,7 +28,7 @@ export default function LandingPage({ onStartSystem }: Props) {
               Dover
             </span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-white/50 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl mx-auto leading-relaxed">
             Software Engineering Student at San Jose State University.
             <br className="hidden sm:block" />
             Building backend systems, Exploring IoT, and Automating.
@@ -199,7 +199,7 @@ export default function LandingPage({ onStartSystem }: Props) {
                     {c.title}
                   </h3>
                   {c.description && (
-                    <p className="mt-1 text-xs text-white/30 line-clamp-2 leading-relaxed">
+                    <p className="mt-1 text-xs text-white/50 line-clamp-2 leading-relaxed">
                       {c.description}
                     </p>
                   )}
@@ -237,7 +237,7 @@ function SectionHeader({ title, sub }: { title: string; sub: string }) {
   return (
     <header className="mb-10">
       <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">{title}</h2>
-      <p className="mt-1.5 text-sm text-white/30">{sub}</p>
+      <p className="mt-1.5 text-sm text-white/50">{sub}</p>
     </header>
   );
 }

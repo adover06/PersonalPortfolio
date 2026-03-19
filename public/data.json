@@ -104,6 +104,16 @@
 "Experience":[
   {
     "company": "Software and Computer Engineering Society (SCE) at SJSU",
+    "role": "Software Engineer - Development Team Member",
+    "bullets": [
+      "Contributed multiple PR's to core club repositories and optimized feature deployment serving 100+ active members",
+      "Diagnose and resolved high-priority bugs in internal infrastructure to ensure high system reliability",
+      "Architected scalable full-stack features for upcoming club projects, collaborating with cross-functional teams to modernize digital tools used by members"
+    ],
+    "url": "https://sce.sjsu.edu"
+  },
+  {
+    "company": "Software and Computer Engineering Society (SCE) at SJSU",
     "role": "Software Engineering Intern",
     "bullets": [
       "Built a monitoring service ingesting Prometheus metrics, detecting missing time-series data, and backfilling null values to ensure dashboard accuracy",

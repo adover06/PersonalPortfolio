@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import dynamic from "next/dynamic";
 import data from "@/public/data.json";
+
+const BtopView = dynamic(() => import("./BtopView"), { ssr: false });
 
 /* ═══════════════════ Fake filesystem ═══════════════════ */
 
@@ -117,25 +120,29 @@ const HELP = `Available commands:
   man andrew        Manual page
   history           Command history
   echo <text>       Print text
+  htop / btop       System monitor (live GitHub, Spotify, weather)
+  nano <subject>    Compose an email (opens mail client)
   shutdown          Return to portfolio
   exit              Return to portfolio
 
   Tab               Autocomplete
   ↑ / ↓             Command history`;
 
-const NEOFETCH = `       .-/+oossssoo+/-.        andrew@portfolio
-    \`:+ssssssssssssssssss+:\`    ────────────────
-  -+ssssssssssssssssssyyssss+-   OS:     Ubuntu 22.04 LTS x86_64
-.ossssssssssssssssssdMMMNysssso.  Host:   San Jose State University
-/sssssssssshdmmNNmmyNMMMMhssss/  Kernel: 6.1.0-portfolio
-+sssssssshmydMMMMMMMNddddyssss+  Shell:  zsh 5.9
-/sssssssshNMMMyhhyyyyhmNMMMNhssss/ Uptime: ~21 years
-.ssssssssdMMMNhssssssssshNMMMdssss. Editor: VS Code
-+sssshhhyNMMNyssssssssssyNMMMysss+ Stack:  Python, Java, TS, React
- .ossssssmNMMNyssssssssshNMMMdsso. Infra:  Docker, Redis, Prometheus
-  -+ssssssssdNMMNhsssssssshNMMds+- Coffee: REQUIRED
-    \`:+sssssssshdmNNNmNMMNds+:\`
-       .-/+oossssss+/-.`;
+const NEOFETCH_LINES = [
+  ["\x1b[36m            .-/+oossssoo+/-.\x1b[0m",            "\x1b[36mandrew\x1b[0m@\x1b[36mportfolio\x1b[0m"],
+  ["\x1b[36m        .:+ssssssssssssssssss+:.\x1b[0m",        "──────────────────"],
+  ["\x1b[36m      -+ssssssssssssssssssyyssss+-\x1b[0m",      "\x1b[33mOS:\x1b[0m      Ubuntu 22.04 LTS x86_64"],
+  ["\x1b[36m    .ossssssssssssssssssdMMMNysssso.\x1b[0m",    "\x1b[33mHost:\x1b[0m    San Jose State University"],
+  ["\x1b[36m   /ssssssssshdmmNNmmyNMMMMhssss/\x1b[0m",       "\x1b[33mKernel:\x1b[0m  6.1.0-portfolio"],
+  ["\x1b[36m  +ssssssshmydMMMMMMMNddddyssss+\x1b[0m",        "\x1b[33mShell:\x1b[0m   zsh 5.9"],
+  ["\x1b[36m  /sssssshNMMMyhhyyyyhmNMMMNhsss/\x1b[0m",       "\x1b[33mUptime:\x1b[0m  ~21 years"],
+  ["\x1b[36m .sssssdMMMNhssssssssshNMMMdssss.\x1b[0m",       "\x1b[33mEditor:\x1b[0m  VS Code"],
+  ["\x1b[36m +ssshhhyNMMNyssssssssyNMMMysss+\x1b[0m",        "\x1b[33mStack:\x1b[0m   Python, Java, TS, React"],
+  ["\x1b[36m  .ossssmNMMNyssssssshNMMMdsso.\x1b[0m",         "\x1b[33mInfra:\x1b[0m   Docker, Redis, Prometheus"],
+  ["\x1b[36m   -+ssssdNMMNhsssshNMMds+-\x1b[0m",             "\x1b[33mCoffee:\x1b[0m  \x1b[32mREQUIRED\x1b[0m"],
+  ["\x1b[36m     .:+sssshdmNNNmNds+:.\x1b[0m",               ""],
+  ["\x1b[36m         .-/+oossso+/-.\x1b[0m",                  ""],
+];
 
 const GIT_LOG = `\x1b[33mcommit a1b2c3d\x1b[0m \x1b[32m(HEAD -> main)\x1b[0m
 Author: Andrew Dover <andrew.dover@gmail.com>
@@ -234,10 +241,21 @@ function runCommand(input: string, cwd: string, history: string[]): CmdResult {
     case "pwd": return { output: cwd };
     case "whoami": return { output: "andrew — Software Engineering Student @ SJSU" };
     case "clear": return { output: "", clear: true };
-    case "neofetch": return { output: NEOFETCH };
+    case "neofetch": {
+      // Strip ANSI codes to measure visible width for alignment
+      const stripAnsi = (s: string) => s.replace(/\x1b\[[0-9;]*m/g, "");
+      const colWidth = 42;
+      const output = NEOFETCH_LINES.map(([logo, info]) => {
+        const visible = stripAnsi(logo);
+        const pad = Math.max(0, colWidth - visible.length);
+        return logo + " ".repeat(pad) + info;
+      }).join("\n");
+      return { output };
+    }
     case "history": return { output: history.slice(-20).map((h, i) => `  ${(i + 1).toString().padStart(3)}  ${h}`).join("\n") };
     case "echo": return { output: arg };
     case "hostname": return { output: "andrew-portfolio" };
+    case "top": case "htop": case "btop": return { output: "__BTOP__" };
     case "uname": return { output: "Linux andrew-portfolio 6.1.0-portfolio x86_64 GNU/Linux" };
     case "uptime": return { output: " " + new Date().toLocaleTimeString() + " up ~21 years, 1 user, load average: 0.42, 0.38, 0.35" };
     case "date": return { output: new Date().toString() };
@@ -267,8 +285,10 @@ function runCommand(input: string, cwd: string, history: string[]): CmdResult {
     case "ping": return { output: `PING ${arg || "localhost"}: 64 bytes, time=0.042ms\nAndrew is online. Try email.` };
     case "rm": return { output: "rm: operation not permitted. Everything here was hard-earned." };
     case "curl": return { output: "Why curl when you can just browse? But I appreciate the instinct." };
-    case "vim": case "vi": case "nano":
-      return { output: `${cmd}: read-only filesystem. This portfolio is immutable.` };
+    case "vim": case "vi":
+      return { output: `${cmd}: read-only filesystem. Try 'nano <subject>' to compose an email instead.` };
+    case "nano":
+      return { output: "__NANO__" };
 
     case "cd": {
       if (!arg || arg === "~") return { output: "", newCwd: "/" };
@@ -337,7 +357,7 @@ function runCommand(input: string, cwd: string, history: string[]): CmdResult {
 function getCompletions(partial: string, cwd: string): string[] {
   const parts = partial.trimStart().split(/\s+/);
   if (parts.length <= 1) {
-    const cmds = ["help","ls","cat","cd","pwd","tree","open","clear","neofetch","git","whoami","history","echo","man","sudo","ssh","ping","exit","shutdown","hostname","uname","uptime","date","logout"];
+    const cmds = ["help","ls","cat","cd","pwd","tree","open","clear","neofetch","git","whoami","history","echo","man","sudo","ssh","ping","exit","shutdown","hostname","uname","uptime","date","logout","htop","btop","top","nano"];
     return cmds.filter((c) => c.startsWith(parts[0] || ""));
   }
   const pathCmds = ["ls", "cat", "cd", "tree", "open"];
@@ -392,6 +412,7 @@ export default function InteractiveTerminal({ onExit }: Props) {
   const [cwd, setCwd] = useState("/");
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
   const [histIdx, setHistIdx] = useState(-1);
+  const [overlay, setOverlay] = useState<"btop" | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -415,6 +436,29 @@ export default function InteractiveTerminal({ onExit }: Props) {
     }
 
     const result = runCommand(trimmed, cwd, cmdHistory);
+
+    // Full-screen btop
+    if (result.output === "__BTOP__") {
+      setLines((l) => [...l, { prompt, command: trimmed, output: "" }]);
+      setCmdHistory((h) => [...h, trimmed]);
+      setHistIdx(-1);
+      setInput("");
+      setOverlay("btop");
+      return;
+    }
+
+    // Nano → open mailto
+    if (result.output === "__NANO__") {
+      const subject = trimmed.replace(/^nano\s*/, "").trim() || "Hello from your portfolio";
+      setLines((l) => [...l, { prompt, command: trimmed, output: `Opening email composer: "${subject}"...` }]);
+      setCmdHistory((h) => [...h, trimmed]);
+      setHistIdx(-1);
+      setInput("");
+      if (typeof window !== "undefined") {
+        window.open(`mailto:andrew.dover@gmail.com?subject=${encodeURIComponent(subject)}`, "_blank");
+      }
+      return;
+    }
 
     if (result.exit) {
       setLines((l) => [...l, { prompt, command: trimmed, output: result.output }]);
@@ -461,6 +505,11 @@ export default function InteractiveTerminal({ onExit }: Props) {
   };
 
   // Welcome message
+  // Full-screen btop overlay
+  if (overlay === "btop") {
+    return <BtopView onExit={() => setOverlay(null)} />;
+  }
+
   const welcome: LineData[] = lines.length === 0 ? [{
     prompt: "",
     command: "",
