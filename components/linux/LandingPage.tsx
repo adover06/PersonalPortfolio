@@ -27,21 +27,19 @@ export default function LandingPage({ onStartSystem, gradient = "from-cyan-400 v
               Andrew&nbsp;Dover
             </span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-xl mx-auto leading-relaxed">
+          <p className="mt-6 text-lg sm:text-l text-white/70 max-w-xl mx-auto leading-relaxed">
             Software Engineering Student at San Jose State University.
             <br className="hidden sm:block" />
             Building backend systems, Exploring IoT, and Automating.
           </p>
 
           {/* Links */}
-          <nav className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <nav className="mt-10 flex flex-wrap items-center justify-center gap-6 text-base sm:text-lg">
             {data.Links.map(({ label, href }) => (
               <a
                 key={label}
                 href={href}
-                className="text-sm px-5 py-2.5 rounded-lg border border-white/10
-                  bg-white/[0.03] text-white/60 hover:text-white hover:border-white/20
-                  hover:bg-white/[0.06] transition-all duration-200"
+                className="font-semibold text-white/60 underline decoration-dashed decoration-white/30 underline-offset-4 transition-colors duration-200 hover:text-white"
                 {...(href.startsWith("http")
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
@@ -50,29 +48,6 @@ export default function LandingPage({ onStartSystem, gradient = "from-cyan-400 v
               </a>
             ))}
           </nav>
-
-          {/* ── START SYSTEM ── */}
-          <div className="mt-16">
-            <button
-              onClick={onStartSystem}
-              className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-xl
-                bg-green-500/10 border-2 border-green-500/30 text-green-400
-                hover:bg-green-500/20 hover:border-green-500/50 hover:text-green-300
-                transition-all duration-300 font-mono text-sm font-bold
-                shadow-[0_0_30px_rgba(34,197,94,0.1)] hover:shadow-[0_0_50px_rgba(34,197,94,0.2)]"
-            >
-              {/* Power icon */}
-              <svg viewBox="0 0 24 24" className="h-5 w-5 group-hover:animate-pulse" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M12 2v10M18.36 6.64a9 9 0 1 1-12.73 0" strokeLinecap="round" />
-              </svg>
-              START SYSTEM
-              {/* Glow ring */}
-              <span className="absolute inset-0 rounded-xl border border-green-400/0 group-hover:border-green-400/20 transition-all duration-500" />
-            </button>
-            <p className="mt-3 text-xs text-white/20 font-mono">
-              Enter interactive terminal mode
-            </p>
-          </div>
         </div>
       </section>
 
@@ -205,6 +180,26 @@ export default function LandingPage({ onStartSystem, gradient = "from-cyan-400 v
                 </div>
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6">
+        <div className="mx-auto max-w-6xl border-t border-white/[0.05] pt-10">
+          <div className="flex flex-col items-center gap-2 text-center">
+            {/* <span className="text-[10px] uppercase tracking-[0.4em] text-white/30">
+              Easter egg
+            </span> */}
+            <button
+              type="button"
+              onClick={onStartSystem}
+              className="mb-10 text-[25px] uppercase tracking-[0.45em] text-white/40  underline-offset-4 decoration-dashed decoration-white/30 transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50"
+            >
+              🖥️ 
+            </button>
+            {/* <p className="text-[10px] text-white/30 font-mono">
+              Easter egg terminal access lives down here.
+            </p> */}
           </div>
         </div>
       </section>
