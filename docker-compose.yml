@@ -3,7 +3,7 @@ services:
     build: .
     restart: unless-stopped
     expose:
-      - "3000"
+      - "3005"
   
   nginx:
     image: nginx:alpine
