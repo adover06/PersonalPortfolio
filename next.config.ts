@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
        
-        source: "/:path*",
+        source: "/((?!tickets).*)", // everything except /tickets (handled above)
         headers: [
           { key: "Access-Control-Allow-Origin", value: "https://andrewdover.com" }, // Your restricted production domain
           { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
