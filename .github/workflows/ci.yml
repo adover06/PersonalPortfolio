@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest   # GitHub gives you a fresh Linux machine
+    runs-on: ubuntu-latest   
     steps:
       # 1. Pull your repo's code onto that machine
       - uses: actions/checkout@v4
