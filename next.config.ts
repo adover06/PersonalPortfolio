@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/api/tickets",
+        source: "/tickets",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Methods", value: "GET,POST,PUT,DELETE,OPTIONS" },
@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       },
       {
        
-        source: "/api/:path*",
+        source: "/:path*",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "https://andrewdover.com" }, // Your restricted production domain
           { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
