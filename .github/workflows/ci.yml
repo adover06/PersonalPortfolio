@@ -27,7 +27,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
 
-deploy:
+  deploy:
     needs: build
     runs-on: self-hosted
     defaults:
