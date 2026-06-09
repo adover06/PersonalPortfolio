@@ -48,3 +48,13 @@ jobs:
           curl -H "Content-Type: application/json" -d "{
             \"content\": \"**Portfolio CI/CD** $STATUS\n${{ github.actor }} pushed \`${{ github.sha }}\`\n<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>\"
           }" "${{ secrets.DISCORD_WEBHOOK }}"
+  ticket-check:
+    needs: build
+    if: github.ref == 'refs/heads/master'   # master only, never on PRs
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          COUNT=$(gh issue list --label critical --state open --json number -q 'length')
+          [ "$COUNT" -eq 0 ] || { echo "::error::$COUNT open critical ticket(s) — blocking deploy"; exit 1; }
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
