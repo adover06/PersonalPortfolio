@@ -16,3 +16,7 @@ services:
       - ./static:/var/www/portfolio/static:ro
     depends_on:
       - nextjs
+  
+networks:
+  public:
+    external: true
