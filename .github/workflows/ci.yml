@@ -23,9 +23,12 @@ jobs:
       # 3. Install deps exactly from package-lock.json (same as you ran locally)
       - run: npm ci
 
-      # 4. The same two commands you just ran — now automated
+      # 4. Lint, type-check, build, and audit dependencies
       - run: npm run lint
+      - run: npx tsc --noEmit                  # type-check — catches TS errors the build can skip
       - run: npm run build
+      - run: npm audit --audit-level=high      # flag vulnerable deps
+        continue-on-error: true                # report only for now (you have existing vulns — Dependabot will fix over time)
 
   deploy:
     needs: [build, ticket-check]                # ← deploy now BLOCKS on an open critical ticket
@@ -61,6 +64,17 @@ jobs:
           echo "probe_success=$UP"
           [ "$UP" = "1" ] || { echo "::error::blackbox says the site is DOWN after deploy"; exit 1; }
 
+  rollback:
+    needs: [deploy, verify]
+    if: failure() && github.ref == 'refs/heads/master'   # deploy or verify failed → auto-revert
+    runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: /home/adover/server/PersonalPortfolio/
+    steps:
+      # Revert to the previous commit (HEAD~1 = the commit before this push) and redeploy.
+      - run: git reset --hard HEAD~1 && docker compose up -d --build
+
   notify:
     needs: [build, deploy, verify]
     if: always() && github.ref == 'refs/heads/master'   # report every real deploy, pass or fail
@@ -80,3 +94,13 @@ jobs:
           [ "$COUNT" -eq 0 ] || { echo "::error::$COUNT open critical ticket(s) — blocking deploy"; exit 1; }
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0                    # full history so gitleaks can scan past commits
+      - uses: gitleaks/gitleaks-action@v2   # scan for committed secrets/keys
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
