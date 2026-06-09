@@ -4,6 +4,8 @@ services:
     restart: unless-stopped
     expose:
       - "3005"
+    networks:
+      - public
   
   nginx:
     image: nginx:alpine
@@ -16,6 +18,8 @@ services:
       - ./static:/var/www/portfolio/static:ro
     depends_on:
       - nextjs
+    networks:
+      - public
   
 networks:
   public:
