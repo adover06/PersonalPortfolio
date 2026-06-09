@@ -28,7 +28,7 @@ jobs:
       - run: npm run build
 
   deploy:
-    needs: build
+    needs: [build, ticket-check]                # ← deploy now BLOCKS on an open critical ticket
     if: github.ref == 'refs/heads/master'       # master only, never on PRs
     runs-on: self-hosted
     defaults:
@@ -37,24 +37,46 @@ jobs:
     steps:
       - run: git pull
       - run: docker compose up -d --build
+      # Verify the app actually responds — "deployed" != "working".
+      # Hits the Next.js container directly (no nginx Host-header rules in the way).
+      - name: Health check
+        run: |
+          sleep 5
+          docker run --rm --network public curlimages/curl:latest -fsS http://nextjs:3005 > /dev/null
+
+  verify:
+    needs: deploy
+    if: github.ref == 'refs/heads/master'
+    runs-on: self-hosted
+    steps:
+      # Monitoring-verified deploy: confirm the blackbox probe is green —
+      # not just a one-off curl, but what your alerting actually sees.
+      - name: Confirm blackbox probe is green
+        run: |
+          sleep 20   # wait >=1 Prometheus scrape so probe_success reflects the NEW deploy
+          UP=$(docker run --rm --network proxy curlimages/curl:latest -fsG \
+                 'http://prometheus:9090/api/v1/query' \
+                 --data-urlencode 'query=probe_success{instance="http://nginx:444"}' \
+               | jq -r '.data.result[0].value[1] // "0"')
+          echo "probe_success=$UP"
+          [ "$UP" = "1" ] || { echo "::error::blackbox says the site is DOWN after deploy"; exit 1; }
 
   notify:
-    needs: [build, deploy]
+    needs: [build, deploy, verify]
     if: always() && github.ref == 'refs/heads/master'   # report every real deploy, pass or fail
     runs-on: ubuntu-latest
     steps:
       - run: |
-          STATUS="${{ (needs.build.result == 'success' && needs.deploy.result == 'success') && '✅ success' || '❌ failed' }}"
+          STATUS="${{ (needs.build.result == 'success' && needs.deploy.result == 'success' && needs.verify.result == 'success') && '✅ verified healthy' || '❌ failed' }}"
           curl -H "Content-Type: application/json" -d "{
             \"content\": \"**Portfolio CI/CD** $STATUS\n${{ github.actor }} pushed \`${{ github.sha }}\`\n<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}>\"
           }" "${{ secrets.DISCORD_WEBHOOK }}"
   ticket-check:
-    needs: build
-    if: github.ref == 'refs/heads/master'   # master only, never on PRs
+    if: github.ref == 'refs/heads/master'   # runs in parallel with build → fails fast on a freeze
     runs-on: ubuntu-latest
     steps:
       - run: |
-          COUNT=$(gh issue list --label critical --state open --json number -q 'length')
+          COUNT=$(gh issue list --repo ${{ github.repository }} --label critical --state open --json number -q 'length')
           [ "$COUNT" -eq 0 ] || { echo "::error::$COUNT open critical ticket(s) — blocking deploy"; exit 1; }
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
