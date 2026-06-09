@@ -31,7 +31,7 @@ jobs:
         continue-on-error: true                # report only for now (you have existing vulns — Dependabot will fix over time)
 
   deploy:
-    needs: [build, ticket-check]                # ← deploy now BLOCKS on an open critical ticket
+    needs: [build, ticket-check, security]                # ← deploy now BLOCKS on an open critical ticket
     if: github.ref == 'refs/heads/master'       # master only, never on PRs
     runs-on: self-hosted
     defaults:
