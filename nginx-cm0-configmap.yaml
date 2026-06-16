@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  portfolio.conf: "server {\n  listen 444;\n  server_name _;\n      resolver 127.0.0.11 valid=30s ipv6=off;\n\n#   location = /chud {\n#         return 301 /chud.pdf;\n#   }\n  location /resume {\n        return 301 /resume.pdf;\n  }\n\n  location /resume.pdf {\n        alias /var/www/portfolio/static/resume.pdf;\n        types { application/pdf pdf; }\n        add_header Cache-Control \"public, max-age=86400\";\n  }\n\n  location ~ ^\\/(linked)?in$ {\n        return 301 https://www.linkedin.com/in/adover06/;\n  }\n\n  location ~ ^\\/(git(hub)?)|(hub)$ {\n        return 301 https://github.com/adover06/;\n  }\n\n  location / {\n      set $nextjs_upstream nextjs:3005;\n      proxy_pass http://$nextjs_upstream;\n\n      proxy_http_version 1.1;\n      proxy_set_header Host $host;\n      proxy_set_header X-Forwarded-Proto $scheme;\n      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n      \n      proxy_set_header Upgrade $http_upgrade;\n      proxy_set_header Connection \"upgrade\";\n  }\n}\n\n"
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: nginx
+  name: nginx-cm0

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.38.0 (HEAD)
+  labels:
+    io.kompose.service: nextjs
+  name: nextjs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nextjs
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.38.0 (HEAD)
+      labels:
+        io.kompose.service: nextjs
+    spec:
+      containers:
+        - image: nextjs
+          name: nextjs
+          ports:
+            - containerPort: 3005
+              protocol: TCP
+      restartPolicy: Always
