@@ -1,0 +1,199 @@
+# Portfolio on Kubernetes — hand-written, cleaned up from the kompose output.
+#
+# Architecture (two separate Deployments → two pods, same as your compose):
+#   internet → nginx Service (LoadBalancer, MetalLB IP) → nginx pods (:444)
+#                                                            → nextjs Service (ClusterIP) → nextjs pods (:3005)
+# nginx is the public front door (proxy + redirects + serves resume.pdf);
+# nextjs is the app, reachable only inside the cluster via the "nextjs" Service name.
+#
+# Everything lives in its own `portfolio` namespace for clean isolation.
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: portfolio
+
+# ─────────────────────────────────────────────────────────────────────
+# Next.js app (the backend behind nginx)
+# ─────────────────────────────────────────────────────────────────────
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs
+  namespace: portfolio
+spec:
+  replicas: 3                              # HA: 3 copies of the app
+  selector:
+    matchLabels:
+      app: nextjs
+  template:
+    metadata:
+      labels:
+        app: nextjs
+    spec:
+      # Spread the 3 replicas across DIFFERENT nodes, so losing one node
+      # can't take down all of them. "preferred" = try hard, but don't block
+      # scheduling if it can't (good for a small cluster).
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: nextjs
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: nextjs
+          image: ghcr.io/adover06/personalportfolio:latest   # ← must be pushed to GHCR + made public
+          ports:
+            - containerPort: 3005
+          # Readiness = "send me traffic only when I can serve."
+          # Liveness  = "restart me if this stops responding."
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3005
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3005
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          # requests = what the scheduler reserves; limits = the hard ceiling.
+          # Prevents one pod from starving a node (important on your 4-core box).
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nextjs                             # nginx reaches the app at "nextjs:3005"
+  namespace: portfolio
+spec:
+  type: ClusterIP                          # internal only — nginx is the public door
+  selector:
+    app: nextjs
+  ports:
+    - port: 3005
+      targetPort: 3005
+---
+# Keeps at least 2 app pods running during node drains/upgrades.
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nextjs
+  namespace: portfolio
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: nextjs
+
+# ─────────────────────────────────────────────────────────────────────
+# nginx front door
+# ─────────────────────────────────────────────────────────────────────
+---
+# Your nginx config, as a ConfigMap (small + textual = correct ConfigMap use).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: portfolio
+data:
+  default.conf: |
+    server {
+      listen 444;
+      server_name _;
+
+      location /resume     { return 301 /resume.pdf; }
+      location /resume.pdf {
+        alias /var/www/portfolio/static/resume.pdf;
+        types { application/pdf pdf; }
+        add_header Cache-Control "public, max-age=86400";
+      }
+      location ~ ^/(linked)?in$       { return 301 https://www.linkedin.com/in/adover06/; }
+      location ~ ^/(git(hub)?)|(hub)$ { return 301 https://github.com/adover06/; }
+
+      location / {
+        # KEY FIX vs kompose: in k8s, "nextjs" resolves via CoreDNS to the
+        # Service's stable ClusterIP. We dropped the `resolver 127.0.0.11`
+        # (that's Docker's embedded DNS and does NOT exist in Kubernetes),
+        # and use a plain proxy_pass so nginx resolves it at startup.
+        proxy_pass http://nextjs:3005;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: portfolio
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 444
+          volumeMounts:
+            - name: conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf      # mount just this one file, not the whole dir
+              readOnly: true
+            - name: static
+              mountPath: /var/www/portfolio/static
+              readOnly: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+      volumes:
+        - name: conf
+          configMap:
+            name: nginx-conf
+        # The static files (resume.pdf, etc). You generate this ConfigMap from
+        # your ./static dir (command below). The 1 MB ConfigMap limit applies —
+        # the production-clean fix is baking static into a custom nginx image,
+        # but this is fine for now.
+        - name: static
+          configMap:
+            name: portfolio-static
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: portfolio
+spec:
+  type: LoadBalancer                       # ← MetalLB assigns a 10.0.30.201 IP here
+  selector:
+    app: nginx
+  ports:
+    - port: 444
+      targetPort: 444
