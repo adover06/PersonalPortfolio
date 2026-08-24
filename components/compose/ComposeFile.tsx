@@ -370,16 +370,6 @@ function ExperienceContent({ jobs }: { jobs: typeof data.Experience }) {
               </a>
             )}
           </div>
-          {j.bullets?.length ? (
-            <ul className="space-y-1 text-xs text-[#7d8590] leading-relaxed">
-              {j.bullets.map((b, i) => (
-                <li key={i} className="flex gap-1.5">
-                  <span className="text-[#3fb950] shrink-0">▸</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
         </div>
       ))}
     </div>
@@ -398,18 +388,6 @@ function ProjectsContent({ projects }: { projects: typeof data.Projects }) {
           className="group/card rounded-lg border border-[#30363d] bg-[#0d1117] overflow-hidden
             hover:border-[#58a6ff]/40 transition-colors"
         >
-          {p.image && (
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                sizes="(min-width:640px) 50vw, 100vw"
-                className="object-cover group-hover/card:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117]/60 to-transparent" />
-            </div>
-          )}
           <div className="p-3">
             <h4 className="text-xs font-semibold text-[#e6edf3] group-hover/card:text-[#58a6ff] transition-colors">
               {p.title}

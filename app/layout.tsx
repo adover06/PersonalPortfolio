@@ -1,22 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader } from "next/font/google";
 import "./globals.css";
 
-
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/*
+  Newsreader rather than Geist/Inter. Those two ship as the default in every
+  Next.js and v0 template, so they read as "generated" before a visitor has
+  processed a single word. A text serif does the opposite.
+*/
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
   title: "Andrew Dover",
-  description: "The portfolio of Andrew Dover",
+  description:
+    "Andrew Dover — software engineer in San Jose. Backend systems, home infrastructure, and IoT.",
 };
 
 export default function RootLayout({
@@ -26,11 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${newsreader.variable} antialiased`}>{children}</body>
     </html>
   );
 }

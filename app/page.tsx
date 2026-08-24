@@ -1,5 +1,5 @@
-import LinuxPortfolio from "@/components/linux/LinuxPortfolio";
+import Portfolio from "@/components/Portfolio";
 
 export default function Home() {
-  return <LinuxPortfolio />;
+  return <Portfolio />;
 }

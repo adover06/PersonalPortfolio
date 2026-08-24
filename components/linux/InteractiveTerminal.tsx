@@ -47,7 +47,7 @@ LinkedIn: linkedin.com/in/adover06`,
   experience: Object.fromEntries(
     (data.Experience ?? []).map((j) => [
       j.company.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30),
-      `${j.company}\nRole: ${j.role}\n${(j.bullets ?? []).map((b) => "  • " + b).join("\n")}`,
+      `${j.company}\nRole: ${j.role}`,
     ])
   ),
 

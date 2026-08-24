@@ -1,0 +1,17 @@
+# Without this, `COPY . .` ships the host's node_modules and .next into the
+# image, then builds on top of them — slow, huge, and occasionally stale.
+node_modules
+.next
+.git
+.github
+npm-debug.log*
+
+# Deliberately NOT ignored: .env / .env.local.
+# NEXT_PUBLIC_MAPBOX_TOKEN is inlined at build time, so the build needs the file
+# present. Excluding it here silently ships a portfolio with a blank map.
+
+k8s
+*.yaml
+portfolio.conf
+README.md
+.DS_Store

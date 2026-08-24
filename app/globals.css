@@ -1,42 +1,164 @@
 @import "tailwindcss";
 
+/*
+  Black page, white text.
+
+  The editorial structure stays — nameplate, folio rule, margin rail, hanging
+  numerals — so the page still reads as laid out rather than assembled. What it
+  does NOT do is the dark-portfolio default: no gradient text, no glass cards,
+  no glow. The only light on the page comes from the shader in the hero.
+
+  Greys are computed against #000, not eyeballed:
+    ink        #ffffff → 21:1
+    ink-muted  #a1a1a1 → ~8.1:1
+    ink-faint  #8a8a8a → ~6.1:1
+    accent     #cf8e6d → ~7.6:1
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #000000;
+  --ink: #ffffff;
+  --ink-muted: #a1a1a1;
+  --ink-faint: #8a8a8a;
+  --rule: #2a2a2a;
+  --accent: #cf8e6d;
+  --laser: #d9a441;
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-accent: var(--accent);
+  --color-laser: var(--laser);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 body {
-  background: #0a0a0a;
-  color: #e6edf3;
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-variant-numeric: lining-nums;
+  /* Newsreader carries an optical-size axis; let the browser use it so the
+     nameplate is drawn with display contrast and body text with text contrast. */
+  font-optical-sizing: auto;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+a {
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: from-font;
 }
-.animate-fadeIn {
-  animation: fadeIn 0.6s ease-out;
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
 }
-.animate-blink {
-  animation: blink 1s step-end infinite;
+
+/*
+  One entrance, staggered by section. Pure CSS so the page body stays a static
+  server component — the only client JS on the page is the hero shader.
+*/
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 620ms cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+
+/*
+  The marker descending the transect. Animating `top` rather than a transform
+  because the travel distance is the full page height, which only a percentage
+  knows — and it is one 1px element on a 19s loop, so the cost is nil.
+*/
+.trickle {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--laser) 50%,
+    transparent 100%
+  );
+  animation: trickle 19s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+/*
+  Horizontal sweeps that run along the section rules.
+
+  Animating `background-position` on an undersized, non-repeating gradient means
+  nothing moves in the layout and nothing new gets painted outside the 1px rule
+  — the band just slides through it.
+*/
+.laser-h {
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--laser) 50%,
+    transparent 100%
+  );
+  background-size: 24% 100%;
+  background-repeat: no-repeat;
+  animation: laser-h 9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes laser-h {
+  0% {
+    background-position: -30% 0;
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  86% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 130% 0;
+    opacity: 0;
+  }
+}
+@keyframes trickle {
+  0% {
+    top: -8rem;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* Markers whose whole purpose is travel have nothing to show when they cannot. */
+  .trickle,
+  .laser-h {
+    display: none;
+  }
 }

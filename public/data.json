@@ -1,153 +1,212 @@
 {
-"Projects":[
-  {
-    "image": "/projects/homelab.png",
-    "title": "Home Lab Infrastructure",
-    "description": "Proxmox server numerous services available through custom wiregaurd configuration, VPN-wide SSO (OpenID, LPAD, OAuth2), monitering via prometheus and grafana, and CI/CD pipelines for automated updates and configuration management",
-    "tags": ["Linux", "Tailscale", "Prometheus", "Docker", "CI/CD"],
-    "links": {"code": "https://github.com/adover06/hedrick-cicd"}
-  },
-  {
-    "image": "/projects/track.png",
-    "title": "Backcountry",
-    "description": "Backpacking planner app for safe and efficient route planning, agentic itinerary generation, and map generation",
-    "tags": ["Python", "FastAPI", "Tailwind", "OpenAI", "Mapbox", "PostgreSQL", "Oauth2", "Docker Compose"],
-    "links": {"code": "https://github.com/adover06/Backcountry"}
-  },
-  {
-    "image": "/projects/liturgy.png",
-    "title": "Liturgical.Display",
-    "description": "Voice-controlled presentation system with FastAPI, WebSockets, and <200ms latency using Vosk STT for offline recognition.",
-    "tags": ["Python", "FastAPI", "Tailwind", "WebSockets", "Vosk", "STT", "Docker Compose", "Redis" ],
-    "links": {"code": "https://github.com/adover06/liturgy.display"}
-  }],
-"Links": [
-  { "label": "GitHub", "href": "https://github.com/adover06" },
-  { "label": "LinkedIn", "href": "https://www.linkedin.com/in/adover06" },
-  { "label": "Resume", "href": "/resume.pdf" },
-  { "label": "Contact", "href": "mailto:andrew.dover@gmail.com?subject=Inquiry" }
-],
-"Courses":[
+  "Projects": [
     {
-    "code": "CS 146",
-    "title": "Data Structures and Algorithms",
-    "description": "Implementations of advanced tree structures, priority queues, heaps, directed and undirected graphs. Advanced searching and sorting techniques (radix sort, heapsort, mergesort, and quicksort). Design and analysis of data structures and algorithms. Divide-and-conquer, greedy, and dynamic programming algorithm design techniques.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=17&coid=157882"
-  },
-  {
-    "code": "CS 151",
-    "title": "Object-Oriented Design",
-    "description": "Design of classes and interfaces. Object-oriented design methodologies and notations. Design patterns. Generics and reflection. Exception handling. Concurrent programming. Graphical user interface programming. Software engineering concepts and tools. Required team-based programming assignment.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=42154"
-  },
-  {
-    "code": "CMPE 120",
-    "title": "Computer Organization and Architecture",
-    "description": "Introduction to computer organization and architecture, system buses, internal memory and external memory, input/output, central processing unit CPU, instruction sets, CPU structure and function, RISC, control unit.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41920"
-  },
-  {
-    "code": "CMPE 102",
-    "title": "Assembly Language Programming",
-    "description": "Assembly programming; assembly-C interface; CPU and memory organization; addressing modes; arithmetic, logic and branch instructions; arrays, pointers, subroutines, stack and procedure calls; software interrupts; multiplication, division and floating point arithmetic.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=116041"
-  },
-  {
-    "code": "CMPE 131",
-    "title": "Software Engineering I",
-    "description": "Why software engineering? What is software engineering? Software development lifecycle activities: project planning and management requirements analysis, requirement specification. Software design, software testing, verification, validation, and documentation. Software quality assurance and review techniques, software maintenance, team-based projects.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41926"
-  },
-  {
-    "code": "MATH 33LA",
-    "title": "Differential Equations and Linear Algebra",
-    "description": "Matrices, determinants, systems of linear equations, vector geometry, linear transformations, eigenvalues and eigenvectors, diagonalization, first order differential equations, linear systems of differential equations, higher order differential equations, Laplace transforms.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=46040"
-  },
-  {
-    "code": "MATH 32",
-    "title": "Calculus 3",
-    "description": "Functions of more than one variable, partial derivatives, multiple integrals and vector calculus. Graphical, algebraic and numerical methods of solving problems.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41254"
-  },
-  {
-    "code": "ISE 130",
-    "title": "Engineering Probability and Statistics",
-    "description": "Probability theory, graphical displays of data, graphical methods of comparisons of samples and hypotheses testing. Statistical estimation and inference. Uses graphical statistical packages.",
-    "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=117721"
-  }
-]
-,
-
-"Experience":[
-  {
-    "company": "Micron Technology",
-    "role": "Software Engineer - ASIC Team",
-    "bullets": [
-      "Building Generative AI powered ASIC workflows this summer..."
-    ],
-    "url": "https://www.micron.com/"
-  },
-  {
-    "company": "Software and Computer Engineering Society (SCE) at SJSU",
-    "role": "Software Engineer - Development Team Member",
-    "bullets": [
-      "Contributed multiple PR's to core club repositories and optimized feature deployment serving 100+ active members",
-      "Diagnose and resolved high-priority bugs in internal infrastructure to ensure high system reliability",
-      "Architected scalable full-stack features for upcoming club projects, collaborating with cross-functional teams to modernize digital tools used by members"
-    ],
-    "url": "https://sce.sjsu.edu"
-  },
-  {
-    "company": "Software and Computer Engineering Society (SCE) at SJSU",
-    "role": "Software Engineering Intern",
-    "bullets": [
-      "Built a monitoring service ingesting Prometheus metrics, detecting missing time-series data, and backfilling null values to ensure dashboard accuracy",
-      "Improved CI/CD reliability by implementing thread-safe deployment coordination with locks to prevent race conditions between concurrent deploys",
-      "Scraped Prometheus metrics and modeled JSON responses with dataclasses for clean, structured data handling"
-    ],
-    "url": "https://sce.sjsu.edu"
-  },
-  {
-    "company": "Alpha Custom Tile",
-    "role": "Tile Technician Specialist",
-    "bullets": [
-  "Supported residential installations by measuring layouts, cutting tile, site prep, and coordinating daily tasks with the lead installer.",
-  "Maintained a clean and safe work environment, adhering to safety protocols and ensuring proper handling of tools and materials.",
-  "Collaborated with team members to ensure efficient workflow and timely completion of projects, contributing to high customer satisfaction."
-    ],
-    "url": ""
-  }
-  
-],
-"archived_projects":[
-{
-    "image": "/projects/lms.png",
-    "title": "Spartan LMS",
-    "description": "Lightweight Canvas-style LMS with Flask, SQLite, and SQLAlchemy featuring auth, grade management, and secure file handling.",
-    "tags": ["Python", "Flask", "SQLite", "SQLAlchemy", "RAG", "OpenAI"],
-    "links": {"code": "https://github.com/adover06/SpartanSync"}
-  },
-  {
-    "image": "/projects/track.png",
-    "title": "APRS Hiking Tracker",
-    "description": "Self-tracking APRS hiking tool parsing TCP packets, running PostGIS geospatial queries, and mapping live routes via Mapbox.",
-    "tags": ["Python", "PostgreSQL", "PostGIS", "Mapbox", "APRS"],
-    "links": {"code": "https://github.com/adover06/aprs-tracker-fullstack"}
-  },
-  {
-    "image": "/projects/rust.png",
-    "title": "Rust+ IoT Bridge",
-    "description": "Event-driven IoT gateway listening to Rust+ companion API, forwarding rules from YAML to LAN devices with debouncing and retries.",
-    "tags": ["Python", "FCM", "Docker", "IoT", "ESP32"],
-    "links": {"code": "https://github.com/adover06/RUSTPLUS-IoT-Gateway"}
-  },
-  {
-    "image": "/projects/doppler.png",
-    "title": "Real-Time ISS Doppler Tracking",
-    "description": "Real-time Doppler calculator using SGP4 orbital propagation and radial velocity math to predict ISS frequency shifts.",
-    "tags": ["Python", "SGP4", "Orbital Mechanics", "Doppler"],
-    "links": {"code": "https://github.com/adover06/dopplercalc"}
-  }
-]
+      "title": "Home Lab Infrastructure",
+      "description": "A Proxmox host running my own services behind WireGuard, with single sign-on across the VPN (OpenID, LDAP, OAuth2), Prometheus and Grafana for monitoring, and CI/CD pipelines for updates and config management.",
+      "tags": [
+        "Linux",
+        "Tailscale",
+        "Prometheus",
+        "Docker",
+        "CI/CD"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/hedrick-cicd"
+      }
+    },
+    {
+      "title": "Backcountry",
+      "description": "Backpacking route planner with agentic itinerary generation and map rendering.",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "Tailwind",
+        "OpenAI",
+        "Mapbox",
+        "PostgreSQL",
+        "OAuth2",
+        "Docker Compose"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/Backcountry"
+      }
+    },
+    {
+      "title": "Liturgical.Display",
+      "description": "Voice-controlled presentation system. FastAPI and WebSockets, under 200 ms end to end, using Vosk for offline speech recognition.",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "Tailwind",
+        "WebSockets",
+        "Vosk",
+        "STT",
+        "Docker Compose",
+        "Redis"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/liturgy.display"
+      }
+    }
+  ],
+  "Links": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/adover06"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/adover06"
+    },
+    {
+      "label": "Resume",
+      "href": "/resume.pdf"
+    },
+    {
+      "label": "Contact",
+      "href": "mailto:andrew.dover@gmail.com?subject=Inquiry"
+    }
+  ],
+  "Courses": [
+    {
+      "code": "CS 146",
+      "title": "Data Structures and Algorithms",
+      "description": "Implementations of advanced tree structures, priority queues, heaps, directed and undirected graphs. Advanced searching and sorting techniques (radix sort, heapsort, mergesort, and quicksort). Design and analysis of data structures and algorithms. Divide-and-conquer, greedy, and dynamic programming algorithm design techniques.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=17&coid=157882"
+    },
+    {
+      "code": "CS 151",
+      "title": "Object-Oriented Design",
+      "description": "Design of classes and interfaces. Object-oriented design methodologies and notations. Design patterns. Generics and reflection. Exception handling. Concurrent programming. Graphical user interface programming. Software engineering concepts and tools. Required team-based programming assignment.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=42154"
+    },
+    {
+      "code": "CMPE 120",
+      "title": "Computer Organization and Architecture",
+      "description": "Introduction to computer organization and architecture, system buses, internal memory and external memory, input/output, central processing unit CPU, instruction sets, CPU structure and function, RISC, control unit.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41920"
+    },
+    {
+      "code": "CMPE 102",
+      "title": "Assembly Language Programming",
+      "description": "Assembly programming; assembly-C interface; CPU and memory organization; addressing modes; arithmetic, logic and branch instructions; arrays, pointers, subroutines, stack and procedure calls; software interrupts; multiplication, division and floating point arithmetic.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=116041"
+    },
+    {
+      "code": "CMPE 131",
+      "title": "Software Engineering I",
+      "description": "Why software engineering? What is software engineering? Software development lifecycle activities: project planning and management requirements analysis, requirement specification. Software design, software testing, verification, validation, and documentation. Software quality assurance and review techniques, software maintenance, team-based projects.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41926"
+    },
+    {
+      "code": "MATH 33LA",
+      "title": "Differential Equations and Linear Algebra",
+      "description": "Matrices, determinants, systems of linear equations, vector geometry, linear transformations, eigenvalues and eigenvectors, diagonalization, first order differential equations, linear systems of differential equations, higher order differential equations, Laplace transforms.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=46040"
+    },
+    {
+      "code": "MATH 32",
+      "title": "Calculus 3",
+      "description": "Functions of more than one variable, partial derivatives, multiple integrals and vector calculus. Graphical, algebraic and numerical methods of solving problems.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=10&coid=41254"
+    },
+    {
+      "code": "ISE 130",
+      "title": "Engineering Probability and Statistics",
+      "description": "Probability theory, graphical displays of data, graphical methods of comparisons of samples and hypotheses testing. Statistical estimation and inference. Uses graphical statistical packages.",
+      "url": "https://catalog.sjsu.edu/preview_course_nopop.php?catoid=13&coid=117721"
+    }
+  ],
+  "Experience": [
+    {
+      "company": "Micron Technology",
+      "role": "Software Engineering Intern, ASIC Team",
+      "period": "Summer 2026",
+      "location": "",
+      "url": "https://www.micron.com/"
+    },
+    {
+      "company": "Software and Computer Engineering Society (SCE) at SJSU",
+      "role": "Software Engineer - Development Team Member",
+      "period": "Jan 2026 – Present",
+      "location": "San José, CA",
+      "url": "https://sce.sjsu.edu"
+    },
+    {
+      "company": "Software and Computer Engineering Society (SCE) at SJSU",
+      "role": "Software Engineering Intern",
+      "period": "Dec 2025 – Jan 2026",
+      "location": "San José, CA",
+      "url": "https://sce.sjsu.edu"
+    },
+    {
+      "company": "Alpha Custom Tile",
+      "role": "Tile Technician Specialist",
+      "period": "",
+      "location": "",
+      "url": ""
+    }
+  ],
+  "archived_projects": [
+    {
+      "image": "/projects/lms.png",
+      "title": "Spartan LMS",
+      "description": "Lightweight Canvas-style LMS with Flask, SQLite, and SQLAlchemy featuring auth, grade management, and secure file handling.",
+      "tags": [
+        "Python",
+        "Flask",
+        "SQLite",
+        "SQLAlchemy",
+        "RAG",
+        "OpenAI"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/SpartanSync"
+      }
+    },
+    {
+      "image": "/projects/track.png",
+      "title": "APRS Hiking Tracker",
+      "description": "Self-tracking APRS hiking tool parsing TCP packets, running PostGIS geospatial queries, and mapping live routes via Mapbox.",
+      "tags": [
+        "Python",
+        "PostgreSQL",
+        "PostGIS",
+        "Mapbox",
+        "APRS"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/aprs-tracker-fullstack"
+      }
+    },
+    {
+      "image": "/projects/rust.png",
+      "title": "Rust+ IoT Bridge",
+      "description": "Event-driven IoT gateway listening to Rust+ companion API, forwarding rules from YAML to LAN devices with debouncing and retries.",
+      "tags": [
+        "Python",
+        "FCM",
+        "Docker",
+        "IoT",
+        "ESP32"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/RUSTPLUS-IoT-Gateway"
+      }
+    },
+    {
+      "image": "/projects/doppler.png",
+      "title": "Real-Time ISS Doppler Tracking",
+      "description": "Real-time Doppler calculator using SGP4 orbital propagation and radial velocity math to predict ISS frequency shifts.",
+      "tags": [
+        "Python",
+        "SGP4",
+        "Orbital Mechanics",
+        "Doppler"
+      ],
+      "links": {
+        "code": "https://github.com/adover06/dopplercalc"
+      }
+    }
+  ]
 }

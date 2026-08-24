@@ -1,5 +1,4 @@
 import data from "@/public/data.json";
-import Image from "next/image";
 
 type Props = {
   onStartSystem: () => void;
@@ -66,16 +65,6 @@ export default function LandingPage({ onStartSystem, gradient = "from-cyan-400 v
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold">{j.company}</h3>
                     <p className="text-sm text-white/40 font-mono">{j.role}</p>
-                    {j.bullets?.length ? (
-                      <ul className="mt-3 space-y-1.5 text-sm text-white/50 leading-relaxed">
-                        {j.bullets.map((b, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-white/20 shrink-0 mt-1">›</span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
                   </div>
                   {j.url && (
                     <a
@@ -111,18 +100,6 @@ export default function LandingPage({ onStartSystem, gradient = "from-cyan-400 v
                   hover:border-white/15 hover:bg-white/[0.04]
                   transition-all duration-300 overflow-hidden"
               >
-                {p.image && (
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image
-                      src={p.image}
-                      alt={p.title}
-                      fill
-                      sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  </div>
-                )}
                 <div className="p-5">
                   <h3 className="text-base font-semibold group-hover:text-white/90 transition-colors">
                     {p.title}

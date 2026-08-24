@@ -53,8 +53,7 @@ Code: ${(p.links as Record<string, string>)?.code ?? "n/a"}${(p.links as Record<
         .replace(/[^a-z0-9]+/g, "-")
         .slice(0, 30),
       `${j.company}
-Role: ${j.role}
-${(j.bullets ?? []).map((b) => "  • " + b).join("\n")}`,
+Role: ${j.role}`,
     ])
   ),
 
