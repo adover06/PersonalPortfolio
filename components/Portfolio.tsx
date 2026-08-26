@@ -1,5 +1,5 @@
 import data from "@/public/data.json";
-import TopoHero from "./TopoHero";
+import RibbonHero from "./RibbonHero";
 import Transect from "./Transect";
 
 /*
@@ -87,11 +87,11 @@ export default function Portfolio() {
   return (
     <>
       {/* ── Hero ──
-          Full-bleed shader behind the nameplate. It sits in its own stacking
-          context so the type stays crisp on top of it, and the gradient below
-          dissolves the canvas into the page rather than cutting it off. */}
+          Full-bleed line ribbon behind the nameplate. It sits in its own
+          stacking context so the type stays crisp on top of it, and the
+          gradient below dissolves the canvas into the page. */}
       <div className="relative isolate flex min-h-[68svh] items-end overflow-hidden sm:min-h-[76svh]">
-        <TopoHero />
+        <RibbonHero />
         {/* Long, eased falloff. A short linear fade leaves a visible horizon
             line where the canvas stops; this carries it all the way to black. */}
         <div
